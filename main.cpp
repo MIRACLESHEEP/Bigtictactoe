@@ -89,7 +89,7 @@ int main(int argc, char** argv) {
 
 	
 	
-	Point gameCoordinates(1,1);
+	Point gameCoordinates(0,0);
 	
 	BigGame theBigGame(gameCoordinates,maxY,maxY);
 		

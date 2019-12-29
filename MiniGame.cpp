@@ -72,13 +72,13 @@ Point MiniGame::play(char currentPlayer,int key_press) {
 			if(_gridPositionX > 0) _gridPositionX--;
 			break;
 		case KEY_RIGHT:
-			if(_gridPositionX < 2) _gridPositionX++;
+			if(_gridPositionX < (GRID_SIZE-1)) _gridPositionX++;
 			break;
 		case KEY_UP:
 			if(_gridPositionY > 0) _gridPositionY--;
 			break;
 		case KEY_DOWN:
-			if(_gridPositionY < 2) _gridPositionY++;
+			if(_gridPositionY < (GRID_SIZE-1)) _gridPositionY++;
 			break;
 			
 		case R_ENTER:
