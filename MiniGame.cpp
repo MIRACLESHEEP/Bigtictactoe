@@ -4,9 +4,8 @@
 using namespace std;
 #include "Point.h"
 
-MiniGame::MiniGame(WINDOW * aWin,Point aStartingPoint,char player1, char player2): _win(aWin),_myStartingPoint(aStartingPoint), _player1(player1), _player2(player2)
+MiniGame::MiniGame(Point aStartingPoint): _myStartingPoint(aStartingPoint)
 {
- _myStartingPoint = aStartingPoint;
  reset();
 }
 
@@ -21,7 +20,7 @@ void MiniGame::reset() {
    // Start with all spaces
    for(int i = 0; i < GRID_SIZE; i++) {
 		for(int j = 0; j < GRID_SIZE; j++) {
-			_grid[i][j] = EMPTY;
+			_grid[i][j] = NONE;
 			//cout << "reset " << i << " " << j <<"\n";
     	}
     }
@@ -65,7 +64,7 @@ void MiniGame::draw() {
 }
 
 
-Point MiniGame::play(char currentCharacter,int key_press) {
+Point MiniGame::play(char currentPlayer,int key_press) {
 
 
 	switch(key_press) {
@@ -83,9 +82,9 @@ Point MiniGame::play(char currentCharacter,int key_press) {
 			break;
 			
 		case R_ENTER:
-			// If the current space is not empty.
-			if(_grid[_gridPositionY][_gridPositionX] == ' ') {
-				_grid[_gridPositionY][_gridPositionX] = currentCharacter;
+			// If the current space is the 'NONE' player
+			if(_grid[_gridPositionY][_gridPositionX] == NONE) {
+				_grid[_gridPositionY][_gridPositionX] = currentPlayer;
 
 				// Do other STUFF ?!
 			} else {

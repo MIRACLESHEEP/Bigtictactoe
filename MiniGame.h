@@ -3,19 +3,13 @@
 
 #include "Point.h"
 #include<curses.h>
-#include "Keys.h"
+#include "game.h"
 
 class MiniGame
 {
 	Point _myStartingPoint;
 	
-	char _player1;
-	char _player2;
-	
-	
 	bool _won;
-	
-	static const char EMPTY = ' ';
 	
 	static const int GRID_SIZE = 3;
 	
@@ -33,7 +27,7 @@ class MiniGame
 		MiniGame() {
 		}
 
-		MiniGame(WINDOW * aWin,Point aStartingPoint,char player1, char player2);
+		MiniGame(Point aStartingPoint);
 		
 		// Plays a turn for play, it returns the last point (x,y)
 		Point play(char player,int key_press);

@@ -22,11 +22,12 @@ class BigGame
 	WINDOW* _bigwin;
 
 	public:
-		BigGame(WINDOW* bigwin,Point aStartingPoint, int maxY, int maxX);
+		BigGame(Point aStartingPoint, int maxY, int maxX);
 
 		void play(int key_press);
 
 	protected:
+		void draw();
 
 };
 

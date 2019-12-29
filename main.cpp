@@ -8,7 +8,7 @@ using namespace std;
 
 #include "BigGame.h"
 
-#include "Keys.h"
+#include "game.h"
 
 #include "Point.h"
 
@@ -84,7 +84,6 @@ int main(int argc, char** argv) {
 	//Window is a variable type
 	//pointer to a window
 	//newwin - makes a new window
-	WINDOW* bigwin = newwin(bigGameNeededSize,bigGameNeededSize,1,1);
 
 	refresh();
 
@@ -92,7 +91,7 @@ int main(int argc, char** argv) {
 	
 	Point gameCoordinates(1,1);
 	
-	BigGame theBigGame(bigwin,gameCoordinates,maxY,maxY);
+	BigGame theBigGame(gameCoordinates,maxY,maxY);
 		
 	// TODO: Mainloop for BigGame/Scoring/exit..
 	while(running) {
