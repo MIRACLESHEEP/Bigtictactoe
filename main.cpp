@@ -18,7 +18,6 @@ using namespace std;
 
 int main(int argc, char** argv) {
 	
-	int maxX, maxY;
 	int GridSize = 3;
 
 	// Think of how much space each game needs, exit if there isn't enough space to display the game
@@ -39,35 +38,21 @@ int main(int argc, char** argv) {
 	
 	bool  isGoodSize = false;
 
-	getmaxyx(stdscr, maxY, maxX);
-	if((bigGameNeededSize > maxY) || (bigGameNeededSize > maxX)) {
+	if((bigGameNeededSize > COLS) || (bigGameNeededSize > LINES)) {
 		cout <<  "Please resize your screen.\n";
 		cout <<  "This game needs a screen size of " << bigGameNeededSize << " x " << bigGameNeededSize << "\n";
-		cout << "You have provided a screen size of " << maxX << " x " << maxY << "\n";
-		return(1);
+		cout << "You have provided a screen size of " << COLS << " x " << LINES << "\n";
+
+		// Will try to resize
+		resize_term(bigGameNeededSize, bigGameNeededSize);
+		if (is_termresized()==false) {
+			cout << "Attempt to resize was not successfull\n";
+			return(1);
+		}
+		
+		
 	}
 
-
-/*
-	do {
-		
-		initscr();
-		getmaxyx(stdscr, maxY, maxX);
-		refresh();
-		if((bigGameNeededSize > maxY) || (bigGameNeededSize > maxX)) {
-		printw( "Please resize your screen.\n");
-		printw(  "This game needs a screen size of %d x %d.\n", bigGameNeededSize, bigGameNeededSize);
-		printw( "You have provided a screen size of %d x %d.\n", maxX , maxY );
-		printw("Enter any key once you have resized your screen:\n");
-		getch();
-		clear();
-		refresh();
-	} else {
-		isGoodSize = true;
-	}   
-
-	} while( isGoodSize == false );
-	*/
 
 	bool running = true;
 	int key_press;
@@ -87,11 +72,12 @@ int main(int argc, char** argv) {
 
 	refresh();
 
+	int startX = (COLS - bigGameNeededSize) / 2;
+	int startY = (LINES - (bigGameNeededSize + BIG_GAME_STATUS_BAR_LINES)) / 2;
 	
+	Point gameCoordinates(startY,startX);
 	
-	Point gameCoordinates(0,0);
-	
-	BigGame theBigGame(gameCoordinates,maxY,maxY);
+	BigGame theBigGame(gameCoordinates,COLS,LINES);
 		
 	// TODO: Mainloop for BigGame/Scoring/exit..
 	while(running) {

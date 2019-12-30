@@ -15,4 +15,11 @@ enum PLAYERS {
 	NONE = ' ',
 };
 
+enum GAME_SIZES {
+	GRID_SIZE = 1,
+	MINI_GAME_SPACES=2,
+	BIG_GAME_STATUS_BAR_LINES = 4,
+
+};
+
 #endif
