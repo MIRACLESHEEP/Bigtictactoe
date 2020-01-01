@@ -20,6 +20,8 @@ class MiniGame
 	int _gridPositionY;
 	int _gridPositionX;
 	
+	bool _isValidPlay;
+	
 	WINDOW * _win;
 	
 	public:
@@ -36,6 +38,7 @@ class MiniGame
 		//these will go into public because I want them to be seen by bic tic tac class
 		bool isWon();
 		bool isTied();
+		bool isValidPlay();
 		char winner();
 
 		// If won, or tied this is a finished game.
@@ -46,7 +49,8 @@ class MiniGame
 		void reset();
 		
 		//draws the board
-		void draw();
+		void draw(bool showCursor);
+
 		
 	protected:
 	
