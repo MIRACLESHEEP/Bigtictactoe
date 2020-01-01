@@ -87,6 +87,9 @@ int main(int argc, char** argv) {
 		 theBigGame.play(key_press);
 
          switch(key_press) {
+                 case R_q:
+	                 running = false;
+	                 break;
                  case R_Q:
 	                 running = false;
 	                 break;

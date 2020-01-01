@@ -81,8 +81,9 @@ void BigGame::play(int key_press) {
 				if(_gridPositionY < (GRID_SIZE-1)) _gridPositionY++;
 				break;
 			case R_ENTER:
-				selectedGame = true;
-				
+				if( _miniGames[_gridPositionX][_gridPositionY].isWon() == false) {
+					selectedGame = true;
+				}
 				break;
 		}
 
@@ -96,11 +97,23 @@ void BigGame::play(int key_press) {
 		Point nextPosition = _miniGames[_gridPositionX][_gridPositionY].play(currentPlayer,key_press);
 		// A play was done in minigame... we need to go to the next minigame
 		// If the mini game did a valid play
+		if (_miniGames[_gridPositionX][_gridPositionY].isWon()){
+			//who has won?
+			//was it tied?
+		}
 		if( _miniGames[_gridPositionX][_gridPositionY].isValidPlay() &&  key_press == R_ENTER ) {
 		// Rules for switching games/winning games that are DONE.
+		
+		if (_miniGames[nextPosition.getX()][nextPosition.getY()].isWon() == false) {
+		
 		  _gridPositionY = nextPosition.getY();
 		  _gridPositionX = nextPosition.getX();
-		  
+			
+			
+		} else {
+			selectedGame = false;
+		}  
+		
 		  // Switch players
 		  if(currentPlayer == PLAYER1 )
 		  	 currentPlayer = PLAYER2;
@@ -204,7 +217,9 @@ void BigGame::draw() {
 	mvwprintw(status,4,bigGameNeededSize - 4, "%d",pointsplayer2);
 	mvwprintw(status,5,1, "Current Game %d %d - Selected ? %d",_gridPositionY,_gridPositionX,selectedGame);
 	mvwprintw(status,6,1, "Current Player %c",currentPlayer);
-
+	if( selectedGame == true )
+		mvwprintw(status,7,1, "Current Game Won? %d",_miniGames[_gridPositionX][_gridPositionY].isWon());
+	
 	wrefresh(status);
 }
 

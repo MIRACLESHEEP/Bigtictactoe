@@ -3,6 +3,7 @@
 #define GAME_H
 
 enum KEYS {
+        R_q     = 81,
         R_Q     = 113,
         R_y     = 121,
         R_Y     = 89,
@@ -16,9 +17,8 @@ enum PLAYERS {
 };
 
 enum GAME_SIZES {
-	GRID_SIZE = 1,
 	MINI_GAME_SPACES=2,
-	BIG_GAME_STATUS_BAR_LINES = 8,
+	BIG_GAME_STATUS_BAR_LINES = 9,
 
 };
 

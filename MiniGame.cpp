@@ -60,6 +60,37 @@ bool MiniGame::isValidPlay() {
 	return _isValidPlay;
 }
 
+bool MiniGame::isWon() {
+	
+	//Detect when a minigame is won
+	//check rows for matching symbols
+	for(int i = 0; i < GRID_SIZE; i++) {
+		
+		if ((_grid[i][0] == _grid[i][1]) && (_grid[i][1] == _grid[i][2]) && (_grid[i][0] != NONE)) {
+		return true;	
+		}
+    	
+    }
+    
+    	//check colls for matching symbols
+    for(int i = 0; i < GRID_SIZE; i++) {
+		
+		if ((_grid[0][i] == _grid[1][i]) && (_grid[1][i] == _grid[2][i]) && (_grid[0][i] != NONE)) {
+			return true;	
+		
+		}
+    	
+    }
+
+
+	//check diagonal for matching symbols
+	
+	
+	return false;
+	
+}
+
+
 Point MiniGame::play(char currentPlayer,int key_press) {
 
 	switch(key_press) {
