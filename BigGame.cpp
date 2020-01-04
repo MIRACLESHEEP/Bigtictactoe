@@ -25,13 +25,7 @@ BigGame::BigGame(Point aStartingPoint, int maxY, int maxX): _myStartingPoint(aSt
 	// Each minigame + 2 spaces + sparators
 	bigGameNeededSize = ( miniGameNeededSize*GRID_SIZE ) + (GRID_SIZE * 2)+ (GRID_SIZE - 1);
 
-	_gridPositionY = 1;
-    _gridPositionX = 1;
-
-	pointsplayer1 = 0;
-	pointsplayer2 = 0;
-
-	selectedGame = false;
+	reset();
 
  
  	int myY = _myStartingPoint.getY();
@@ -57,6 +51,23 @@ BigGame::BigGame(Point aStartingPoint, int maxY, int maxX): _myStartingPoint(aSt
 	_miniGames[2][2] = MiniGame(Point(myY + 29,myX + 29));
 
 }
+
+//resets the game
+void BigGame::reset() {
+	_gridPositionY = 1;
+    _gridPositionX = 1;
+
+	pointsplayer1 = 0;
+	pointsplayer2 = 0;
+	
+	selectedGame = false;
+	
+	for (int i = 0 ; i < GRID_SIZE ; i++) {
+	for (int j = 0 ; j < GRID_SIZE ; j++)
+	_miniGames[i][j].reset();
+	}
+	
+} 
 
 void BigGame::play(int key_press) {
 
@@ -104,13 +115,14 @@ void BigGame::play(int key_press) {
 		if( _miniGames[_gridPositionX][_gridPositionY].isValidPlay() &&  key_press == R_ENTER ) {
 		// Rules for switching games/winning games that are DONE.
 		
-		if (_miniGames[nextPosition.getX()][nextPosition.getY()].isWon() == false) {
+		if ((_miniGames[nextPosition.getX()][nextPosition.getY()].isWon() == false) || (_miniGames[nextPosition.getX()][nextPosition.getY()].isFinished() == false)) {
 		
 		  _gridPositionY = nextPosition.getY();
 		  _gridPositionX = nextPosition.getX();
 			
 			
 		} else {
+
 			selectedGame = false;
 		}  
 		
@@ -127,7 +139,7 @@ void BigGame::play(int key_press) {
 
 	}
 
-	cout << " key_press " << key_press << "selectedGame " << selectedGame << "KEY_ENTER" << KEY_ENTER << "\n";
+	 cout << " key_press " << key_press << "selectedGame " << selectedGame << "KEY_ENTER" << KEY_ENTER << "\n";
 	
 }
 
@@ -185,12 +197,27 @@ void BigGame::draw() {
 	mvprintw(myY++, myX, "             |             |             ");
 	mvprintw(myY++, myX, "             |             |             "); 
 
-
 	// Draw all mini games
+	//Also check for points
+	pointsplayer1 = 0;
+	pointsplayer2 = 0;
 	for( int COL=0; COL < GRID_SIZE; COL++ ) {
 		for( int ROW=0; ROW < GRID_SIZE; ROW++ ) {
 			_miniGames[COL][ROW].draw(false);
+			
+			char winner = _miniGames[COL][ROW].winner();
+			switch(winner) {	
+			case PLAYER1:
+				pointsplayer1++;
+				break;
+			case PLAYER2:
+				pointsplayer2++;
+				break;
+			default:
+				break;
 		}
+		
+			}
 	}
 	
 	if( selectedGame == false ) {
@@ -223,6 +250,9 @@ void BigGame::draw() {
 	wrefresh(status);
 }
 
+
+char BigGame::BigGamewinner() {
+}
 
 
 

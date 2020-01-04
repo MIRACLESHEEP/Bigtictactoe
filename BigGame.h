@@ -31,15 +31,24 @@ class BigGame
 	
 	char currentPlayer = PLAYER1;
 
-	WINDOW* _bigwin;
+	//detects of the big game is won
+	bool isBigGameWon();
+	bool isBigGameFinished();
+	bool isBigGameTied();
+	char BigGamewinner();
+	
+	
+	//WINDOW* _bigwin;
 
 	public:
 		BigGame(Point aStartingPoint, int maxY, int maxX);
 
 		void play(int key_press);
+		void draw();
+		void reset();
 
 	protected:
-		void draw();
+		
 
 };
 

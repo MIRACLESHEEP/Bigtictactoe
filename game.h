@@ -8,6 +8,8 @@ enum KEYS {
         R_y     = 121,
         R_Y     = 89,
         R_ENTER = 10,
+        R_r = 114,
+        R_R = 82,
 };
 
 enum PLAYERS {
@@ -18,7 +20,7 @@ enum PLAYERS {
 
 enum GAME_SIZES {
 	MINI_GAME_SPACES=2,
-	BIG_GAME_STATUS_BAR_LINES = 9,
+	BIG_GAME_STATUS_BAR_LINES = 12,
 
 };
 
