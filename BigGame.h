@@ -1,6 +1,6 @@
 #ifndef BIGGAME_H
 #define BIGGAME_H
-
+#include "Infobar.h"
 #include "MiniGame.h"
 #include <curses.h>
 
@@ -37,6 +37,7 @@ class BigGame
 	bool isBigGameTied();
 	char BigGamewinner();
 	
+	Infobar statusBar;
 	
 	//WINDOW* _bigwin;
 

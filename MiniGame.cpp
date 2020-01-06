@@ -179,6 +179,7 @@ Point MiniGame::play(char currentPlayer,int key_press) {
 				// Do other STUFF ?!
 			} else {
 				_isValidPlay = false;
+				//_statusBar->showmessage("OCCUPIED");
 				// Occupied position ... somehow show that...
 				// mvprintw(_mY / 2 - 10, _mX / 2 - 6, "OCCUPIED");
 			}
@@ -196,3 +197,7 @@ Point MiniGame::play(char currentPlayer,int key_press) {
 	
 	return Point(_gridPositionY,_gridPositionX);
 } 
+
+void MiniGame::setInfobar(Infobar * theStatusBarPointer) {
+	_statusBar=theStatusBarPointer;
+}

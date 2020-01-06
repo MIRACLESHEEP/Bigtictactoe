@@ -14,8 +14,6 @@ using namespace std;
 
 BigGame::BigGame(Point aStartingPoint, int maxY, int maxX): _myStartingPoint(aStartingPoint), _maxY(maxY), _maxX(_maxY)
 {
-
-
 	// Each player character + 2 spaces + separators
 	miniGameNeededSize = GRID_SIZE + GRID_SIZE * 2 + ( GRID_SIZE - 1 );
 
@@ -27,15 +25,10 @@ BigGame::BigGame(Point aStartingPoint, int maxY, int maxX): _myStartingPoint(aSt
 
 	reset();
 
- 
  	int myY = _myStartingPoint.getY();
 	int myX = _myStartingPoint.getX();
 	
-	
-
-	status = newwin(BIG_GAME_STATUS_BAR_LINES,bigGameNeededSize,myY + bigGameNeededSize, myX);
- 	refresh();
-
+	statusBar = Infobar( myY + bigGameNeededSize,  myX, bigGameNeededSize); 
 
 	// initialized the MiniGames
  	_miniGames[0][0] = MiniGame(Point(myY + 1, myX + 1));
@@ -50,7 +43,7 @@ BigGame::BigGame(Point aStartingPoint, int maxY, int maxX): _myStartingPoint(aSt
 	_miniGames[1][2] = MiniGame(Point(myY + 29,myX + 15));
 	_miniGames[2][2] = MiniGame(Point(myY + 29,myX + 29));
 
-}
+} // End of ...
 
 //resets the game
 void BigGame::reset() {
@@ -63,8 +56,10 @@ void BigGame::reset() {
 	selectedGame = false;
 	
 	for (int i = 0 ; i < GRID_SIZE ; i++) {
-	for (int j = 0 ; j < GRID_SIZE ; j++)
-	_miniGames[i][j].reset();
+		for (int j = 0 ; j < GRID_SIZE ; j++) {
+			_miniGames[i][j].reset();
+			_miniGames[i][j].setInfobar(&statusBar);
+		}
 	}
 	
 } 
@@ -140,7 +135,7 @@ void BigGame::play(int key_press) {
 	}
 
 	 cout << " key_press " << key_press << "selectedGame " << selectedGame << "KEY_ENTER" << KEY_ENTER << "\n";
-	
+	statusBar.updateScore(pointsplayer1,pointsplayer2,currentPlayer);
 }
 
 void BigGame::draw() {
@@ -233,21 +228,10 @@ void BigGame::draw() {
 	}
 	
 	// cout << "miniGameNeededSize " << miniGameNeededSize <<  "bigGameNeededSize "  << bigGameNeededSize << "_cursorY " << _cursorY << " _cursorX" << _cursorX << "\n";
+
+
+	statusBar.draw();
 	
-	// Draws the "Status Bar"...
-	box(status,0,0);
-	refresh();
-	mvwprintw(status,1,bigGameNeededSize / 2 - 3, "STATS");
-	mvwprintw(status,2,1, "Player 1");
-	mvwprintw(status,4,4, "%d",pointsplayer1);
-	mvwprintw(status,2,bigGameNeededSize - 10, "Player 2");
-	mvwprintw(status,4,bigGameNeededSize - 4, "%d",pointsplayer2);
-	mvwprintw(status,5,1, "Current Game %d %d - Selected ? %d",_gridPositionY,_gridPositionX,selectedGame);
-	mvwprintw(status,6,1, "Current Player %c",currentPlayer);
-	if( selectedGame == true )
-		mvwprintw(status,7,1, "Current Game Won? %d",_miniGames[_gridPositionX][_gridPositionY].isWon());
-	
-	wrefresh(status);
 }
 
 

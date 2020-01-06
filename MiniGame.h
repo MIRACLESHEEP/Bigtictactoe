@@ -1,5 +1,8 @@
 #ifndef MINIGAME_H
 #define MINIGAME_H
+#include "Infobar.h"
+
+#include "Infobar.h"
 
 #include "Point.h"
 #include<curses.h>
@@ -24,7 +27,9 @@ class MiniGame
 	
 	bool _isValidPlay;
 	
-	WINDOW * _win;
+	//WINDOW * _win;
+	//This is the address of the status bar/ infobar object
+	Infobar *_statusBar;
 	
 	public:
 		// A game need to have a starting co-ordinates
@@ -44,7 +49,7 @@ class MiniGame
 		char winner();
 
 		// If won, or tied this is a finished game.
-		
+		void setInfobar(Infobar * theStatusBarPointer);
 		bool isFinished();
 		
 		// Resets the game

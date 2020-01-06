@@ -7,6 +7,7 @@
  *											 *
  *********************************************/
 
+
 #include <iostream>
 
 #include <windows.h>
@@ -79,6 +80,7 @@ int main(int argc, char** argv) {
 	   	clear();
 	   	printw("Please resize the screen - This game needs a screen size of %d %d\n",bigGameNeededSize,bigGameNeededLines);
 		printw("You have provided a screen size of %d %d\n",COLS,LINES);
+		printw("It is recommended that you maximize your screen\n");
 		
 		key_press = wgetch(stdscr);
 
@@ -204,18 +206,51 @@ void intro() {
 	slowtext("Hello!\n");
 	slowtext("This is my sommative for Icsu grade ten.\n");
 	slowtext("The program I chose to make for it is called bigtictactoe.\n");
-	slowtext("The rules are a little complicated\n");
+	slowtext("The rules are a little complicated\n\n");
 	slowtext("Press any key to continue:\n");
 	getch();
+	system("cls");
 	
 
 	slowtext("I will start with the controls:\n");
 	slowtext("To select a small game of tic tac toe, or to mark a grid, press ENTER.\n");
 	slowtext("To move the cursor around, use the arrow keys.\n");
 	slowtext("if you want to quit the game once it has begun, press upper or lower case Q.\n");
-	slowtext("If you want to restart the game once it has begun, press upper or lower case R.\n");
+	slowtext("If you want to restart the game once it has begun, press upper or lower case R.\n\n");
 	slowtext("Those are all the controls. Press any key to continue:\n");
 	getch();
+	system("cls");
+	
+	slowtext("Let's move on to how to play:\n");
+	slowtext("In this game, there are two players.\n");
+	slowtext("The board consists of nine small tictactoe games inside one big tic tac toe grid.\n");
+	slowtext("The goal of the game is to win the majority of the Minigames.\n\n");
+	slowtext("Press any key to continue:\n");
+	getch();
+	system("cls");
+	
+	slowtext("Player one first begins the game.\n");
+	slowtext("They can choose any one of the minigames on the big tic tac toe grid.\n");
+	slowtext("Then, they are allowed to mark a spot on the grid they chose.\n");
+	slowtext("After that, it is the next player's turn.\n");
+	slowtext("They are sent to the minigame that is equivalent to the spot player 1 chose on the minigame they chose.\n");
+	slowtext("For example, if player one played in the middle position of one of the minigames, player two would be sent\nto the middle minigame of the board.\n\n");
+	slowtext("This is the main mechanic of the game.\n");
+	slowtext("Press any key to continue:\n");
+	getch();
+	system("cls");
+	
+	slowtext("After playing for a while, if one of the players wins a minigame or the minigame is filled,\nno players can be sent back to that minigame.\n");
+	slowtext("If they are, that player will be able to pick any minigame on the board to play in instead.\n\n");
+	slowtext("Press any key to continue:\n");
+	getch();
+	system("cls");
+	
+	slowtext("The game will end once all the minigames have been one or there are no spaces left to fill up.\n\n");
+	slowtext("These are all the instructions.\n");
+	slowtext("Press any key to continue to the game:\n");
+	getch();
+	system("cls");
 	
 	}
 	
@@ -224,7 +259,7 @@ void intro() {
 void slowtext(string phrase) {
 	
 	cout<< phrase;
-	Sleep(500);
+	Sleep(1000);
 	
 }
 
