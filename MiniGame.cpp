@@ -198,6 +198,4 @@ Point MiniGame::play(char currentPlayer,int key_press) {
 	return Point(_gridPositionY,_gridPositionX);
 } 
 
-void MiniGame::setInfobar(Infobar * theStatusBarPointer) {
-	_statusBar=theStatusBarPointer;
-}
+

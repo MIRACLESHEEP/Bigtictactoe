@@ -71,54 +71,44 @@ int main(int argc, char** argv) {
 	bool  isGoodSize = false;
 
 	bool running = true;
-	
+
+   // Do this until we know we have a good screen size...	
    do {
-
-	if((bigGameNeededSize <= COLS) && (bigGameNeededLines <= LINES)) {
-		isGoodSize=true; 
-	} else {
-	   	clear();
-	   	printw("Please resize the screen - This game needs a screen size of %d %d\n",bigGameNeededSize,bigGameNeededLines);
-		printw("You have provided a screen size of %d %d\n",COLS,LINES);
-		printw("It is recommended that you maximize your screen\n");
-		
-		key_press = wgetch(stdscr);
-
-		// Will try to resize
-		if (is_termresized()==false) {
-			printw("Attempt to resize was not successfull\n");
+		// If the size is good, we are OK.
+		if((bigGameNeededSize <= COLS) && (bigGameNeededLines <= LINES)) {
+			isGoodSize=true; 
 		} else {
-			resize_term(0,0);
+			// So size is not good, let's get it resized
+		   	clear();
+		   	printw("Please resize the screen - This game needs a screen size of %d %d\n",bigGameNeededSize,bigGameNeededLines);
+			printw("You have provided a screen size of %d %d\n",COLS,LINES);
+			printw("It is recommended that you maximize your screen\n");
+			
+			key_press = wgetch(stdscr);
+	
+			// Will try to resize
+			if (is_termresized() == false) {
+				printw("Attempt to resize was not successfull\n");
+			} else {
+				resize_term(0,0);
+			}
+	
+	         switch(key_press) {
+	                 case R_q:
+		                 running = false;
+		                 break;
+	                 case R_Q:
+		                 running = false;
+		                 break;
+	         } // End Switch/Case
+	
 		}
-
-         switch(key_press) {
-                 case R_q:
-	                 running = false;
-	                 break;
-                 case R_Q:
-	                 running = false;
-	                 break;
-         } // End Switch/Case
-
-	}
 	
 	} while( (isGoodSize == false) && (running == true ));
+
+	// Clear and refresh screen to start showing game..
 	clear();
 	
-
-    
-
-
-
-	// Find how big the screen is... at start time, NO Resizing ?!
-
-
-
-
-	//Window is a variable type
-	//pointer to a window
-	//newwin - makes a new window
-
 	refresh();
 
 	int startX = (COLS - bigGameNeededSize) / 2;
@@ -129,6 +119,7 @@ int main(int argc, char** argv) {
 	BigGame theBigGame(gameCoordinates,COLS,LINES);
 		
 	// TODO: Mainloop for BigGame/Scoring/exit..
+
 	while(running) {
 
 		 theBigGame.draw();

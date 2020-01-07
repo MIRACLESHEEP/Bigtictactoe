@@ -27,10 +27,6 @@ class MiniGame
 	
 	bool _isValidPlay;
 	
-	//WINDOW * _win;
-	//This is the address of the status bar/ infobar object
-	Infobar *_statusBar;
-	
 	public:
 		// A game need to have a starting co-ordinates
 		MiniGame() {
@@ -48,8 +44,6 @@ class MiniGame
 		bool isValidPlay();
 		char winner();
 
-		// If won, or tied this is a finished game.
-		void setInfobar(Infobar * theStatusBarPointer);
 		bool isFinished();
 		
 		// Resets the game

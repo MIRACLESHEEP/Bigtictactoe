@@ -37,9 +37,6 @@ class BigGame
 	bool isBigGameTied();
 	char BigGamewinner();
 	
-	Infobar statusBar;
-	
-	//WINDOW* _bigwin;
 
 	public:
 		BigGame(Point aStartingPoint, int maxY, int maxX);
